@@ -7,8 +7,8 @@ module.exports =
   {
     facebook:
     {
-      clientID: '718465424974343',
-      clientSecret: '5ebb5c1699ff98a1f910ee06d3f58d0a',
+      clientID: '636876689830936',
+      clientSecret: '6768591c5f28f63a85749657f0ce132b',
       callbackURL: 'http://localhost:3000/facebook/callback'
     },
     github:
