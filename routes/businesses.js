@@ -1,11 +1,8 @@
-/**
- * Created by RFreeman on 10/6/2016.
- */
 var express = require('express');
 var router = express.Router();
 
-// reference the Game model
-var Game = require('../models/game');
+// reference the business model
+var Business = require('../models/business');
 
 // auth check
 function isLoggedIn(req, res, next)
@@ -20,99 +17,99 @@ function isLoggedIn(req, res, next)
   }
 }
 
-// GET handler for /games
+// GET handler for /businesses
 router.get('/', isLoggedIn, function(req, res, next) {
 
-    // use Game model to run a query
-    Game.find(function(err, games) {
+    // use business model to run a query
+    Business.find(function(err, businesses) {
         if (err) {
             console.log(err);
             res.render('error');
         }
         else {
-            // load the games view
-            res.render('games', {
-                title: 'Video Games',
-                games: games,
+            // load the businesses view
+            res.render('businesses', {
+                title: 'Businesses',
+                businesses: businesses,
                 user: req.user
             });
         }
     });
 });
 
-/* GET /games/add - display empty Game form */
+/* GET /businesses/add - display empty business form */
 router.get('/add', isLoggedIn, function(req, res, next) {
 
-    // load the blank game form
-    res.render('add-game', {
-        title: 'Add a New Game',
+    // load the blank business form
+    res.render('add-business', {
+        title: 'Add a New Business',
         user: req.user
     });
 });
 
-/* POST /games/add - process form submission */
+/* POST /businesses/add - process form submission */
 router.post('/add', isLoggedIn, function(req, res, next) {
-    // use the Game model and call the Mongoose create function
-    Game.create( {
+    // use the business model and call the Mongoose create function
+    Business.create( {
         title: req.body.title,
         publisher: req.body.publisher,
         genre: req.body.genre,
         year: req.body.year
-    }, function(err, Game) {
+    }, function(err, business) {
            if (err) {
                console.log(err);
                res.render('error');
            }
         else {
-               res.redirect('/games');
+               res.redirect('/businesses');
            }
         });
 });
 
-/* GET /games/delete/:_id - run a delete on selected game */
+/* GET /businesses/delete/:_id - run a delete on selected business */
 router.get('/delete/:_id', isLoggedIn, function(req, res, next) {
     // read the id value from the url
     var _id = req.params._id;
 
-    // use mongoose to delete this game
-    Game.remove( { _id: _id }, function(err) {
+    // use mongoose to delete this business
+    Business.remove( { _id: _id }, function(err) {
        if (err) {
            console.log(err);
            res.render('error', {message: 'Delete Error'});
        }
-        res.redirect('/games');
+        res.redirect('/businesses');
     });
 });
 
-/* GET /games/:_id - show the edit form */
+/* GET /businesses/:_id - show the edit form */
 router.get('/:_id', isLoggedIn, function(req, res, next) {
     // get the id from the url
     var _id = req.params._id;
 
-    // look up the selected Game document with this _id
-    Game.findById(_id,  function(err, game) {
+    // look up the selected business document with this _id
+    Business.findById(_id,  function(err, business) {
       if (err) {
           console.log(err);
-          res.render('error', { message: 'Could not find Game'});
+          res.render('error', { message: 'Could not find business'});
       }
         else {
           // load the edit form
-          res.render('edit-game', {
-              title: 'Edit Game',
-              game: game,
+          res.render('edit-business', {
+              title: 'Edit business',
+              business: business,
               user: req.user
           });
       }
     });
 });
 
-/* POST /games/:_id - save form to process Game updates */
+/* POST /businesses/:_id - save form to process business updates */
 router.post('/:_id', isLoggedIn, function(req, res, next) {
     // get the id from the url
     var _id = req.params._id;
 
-    // instantiate a new Game object & populate it from the form
-    var game = new Game( {
+    // instantiate a new business object & populate it from the form
+    var business = new business( {
        _id: _id,
         title: req.body.title,
         publisher: req.body.publisher,
@@ -121,13 +118,13 @@ router.post('/:_id', isLoggedIn, function(req, res, next) {
     });
 
     // save the update using Mongoose
-    Game.update( { _id: _id }, game, function(err) {
+    Business.update( { _id: _id }, business, function(err) {
        if (err) {
            console.log(err);
-           res.render('error', {message: 'Could not Update Game'});
+           res.render('error', {message: 'Could not Update Business'});
        }
         else {
-           res.redirect('/games');
+           res.redirect('/businesses');
        }
     });
 });

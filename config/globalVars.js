@@ -1,8 +1,7 @@
 // global variables for the application
-module.exports = {
-  //db: 'mongodb://localhost/comp2068-thu'
-  db: 'mongodb://whatif_85_2:mypassword@ds048319.mlab.com:56698/comp2068-lesson6',
-  //db:<dbuser>:<dbpassword>@ds056698.mlab.com:56698/comp2068-lesson6
+module.exports =
+{
+  db: 'mongodb://assignment2:assignment2@ds151927.mlab.com:51927/comp2068-assignment2',
   secret: 'UseThis to create Salt 123',
   ids:
   {

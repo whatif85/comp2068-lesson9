@@ -11,7 +11,7 @@
             <li><a href="/">Home</a></li>
             <% if (user)
             { %>
-              <li><a href="/games">Games</a></li>
+              <li><a href="/businesses">Businesses</a></li>
               <li><a href="/logout">Logout</a></li>
 
             <% }
@@ -23,7 +23,7 @@
         </ul>
         <% if (user) { %>
           <div class="navbar-text pull-right">
-            Welcome, <%= user.username %>
+            Welcome, <%= user.username %>!
           </div>
         <% } %>
     </nav>

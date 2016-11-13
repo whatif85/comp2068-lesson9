@@ -8,8 +8,8 @@ var passport = require('passport');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
-    title: 'Lesson 9',
-    message: 'Authentication with Passport OAuth - Part 2',
+    title: 'Assignment 2',
+    message: 'My work for Assignment 2',
     user: req.user
   });
 });
@@ -60,7 +60,7 @@ router.get('/login', function(req, res, next)
 /* POST login page */
 router.post('/login', passport.authenticate('local',
   {
-    successRedirect: '/games',
+    successRedirect: '/businesses',
     failureRedirect: '/login',
     failureMessage: 'Invalid Login' // stored in session.messages
   }));
@@ -86,8 +86,8 @@ router.get('/facebook/callback', passport.authenticate('facebook',
   failureMessage: 'Invalid Login'
 }), function(req, res, next)
 {
-  // show the games page
-  res.redirect('/games');
+  // show the businesses page
+  res.redirect('/businesses');
 });
 
 /* GET /github */
@@ -104,8 +104,8 @@ router.get('/github/callback', passport.authenticate('github',
   failureMessage: 'Invalid Login'
 }), function(req, res, next)
 {
-  // show the games page
-  res.redirect('/games');
+  // show the businesses page
+  res.redirect('/businesses');
 });
 
 module.exports = router;

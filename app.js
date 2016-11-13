@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-// reference games controller we created
-var games = require('./routes/games');
+// reference businesses controller we created
+var businesses = require('./routes/businesses');
 
 var app = express();
 
@@ -172,8 +172,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-// map requests starting with /games to the new games controller
-app.use('/games', games);
+// map requests starting with /businesses to the new businesses controller
+app.use('/businesses', businesses);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

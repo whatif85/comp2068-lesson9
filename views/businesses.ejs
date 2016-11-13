@@ -1,0 +1,25 @@
+<% include partials/header.ejs %>
+
+<h1><%= title %></h1>
+<a href="/business/add">Add a business</a>
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Publisher</th>
+    <th>Genre</th>
+    <th>Year</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% for (var i=0; i < businesss.length; i++) { %>
+    <tr>
+      <td><%= businesss[i].title %></td>
+      <td><%= businesss[i].publisher %></td>
+      <td><%= businesss[i].genre %></td>
+      <td><%= businesss[i].year %></td>
+      <td><a href="/businesss/<%= businesss[i]._id %>">Edit</a></td>
+      <td><a href="/businesss/delete/<%= businesss[i]._id %>" class="confirmation">Delete</a></td>
+  </tr>
+  <% } %>
+</table>
+<% include partials/footer.ejs %>
